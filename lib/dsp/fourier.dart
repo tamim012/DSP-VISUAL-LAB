@@ -58,8 +58,8 @@ void fftInPlace(List<double> re, List<double> im, bool inverse) {
 /// power-of-two lengths, exactly like the original `dft()`.
 ComplexSeq dft(List<double> reIn, List<double>? imIn, {bool inverse = false}) {
   final n = reIn.length;
-  final re = List<double>.from(reIn);
-  final im = List<double>.from(imIn ?? List.filled(n, 0));
+  final re = reIn.map((value) => value.toDouble()).toList();
+  final im = imIn == null ? List<double>.filled(n, 0.0) : imIn.map((value) => value.toDouble()).toList();
   if (isPow2(n)) {
     fftInPlace(re, im, inverse);
     return ComplexSeq(re, im);
